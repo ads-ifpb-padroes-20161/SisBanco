@@ -2,7 +2,6 @@ package br.edu.ifpb.padroes.servico;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-
 import br.edu.ifpb.padroes.dao.DaoFactory;
 import br.edu.ifpb.padroes.interfaces.DaoFactoryIF;
 import br.edu.ifpb.padroes.interfaces.GerenteDaoIF;
@@ -16,7 +15,7 @@ public class GerenteService {
 	
 	public GerenteService() throws SQLException{
 		fabrica = DaoFactory.createFactory();
-		gerenteDao = fabrica.criaGerenteDao();
+		gerenteDao = fabrica.criarGerenteDao();
 	}
 	
 	public void adicionarGerente(String cpf,String rg,String nome,String dataNasc,String telefone,String email,
@@ -31,23 +30,23 @@ public class GerenteService {
 		novoGerente.setTelefone(telefone);
 		novoGerente.setEmail(email);
 		novoGerente.setRua(rua);
-		novoGerente.setNumCasa(numCasa);;
+		novoGerente.setNumCasa(numCasa);
 		novoGerente.setBairro(bairro);
 		novoGerente.setCidade(cidade);
 		novoGerente.setSenha(senha);
 		novoGerente.setAgencia(agencia);
 		
-		gerenteDao.addGerente(novoGerente);
+		gerenteDao.adicionarGerente(novoGerente);
 		
 	}
 	
 	public Gerente pesquisarGerente(String cpf) throws SQLException{
-		Gerente gerente = gerenteDao.buscaGerente(cpf); 
+		Gerente gerente = gerenteDao.buscarGerente(cpf); 
 		return gerente;
 	}
 	
 	public void deletarGerente(String cpf) throws SQLException{
-		gerenteDao.removeGerente(cpf);
+		gerenteDao.removerGerente(cpf);
 	}
 	
 	public void alterarGerente(String nome,String dataNasc,String telefone,String email,String rua,

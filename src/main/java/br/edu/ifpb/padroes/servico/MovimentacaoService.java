@@ -3,7 +3,6 @@ package br.edu.ifpb.padroes.servico;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-
 import br.edu.ifpb.padroes.dao.DaoFactory;
 import br.edu.ifpb.padroes.interfaces.ContaDaoIF;
 import br.edu.ifpb.padroes.interfaces.DaoFactoryIF;
@@ -19,8 +18,8 @@ public class MovimentacaoService {
 	
 	public MovimentacaoService() throws SQLException{
 		fabrica = DaoFactory.createFactory();
-		contaDao = fabrica.criaContaDao();
-		movimentacaoDao = fabrica.criaMovimentacaoDao();
+		contaDao = fabrica.criarContaDao();
+		movimentacaoDao = fabrica.criarMovimentacaoDao();
 	}
 	
 	private void creditarSaldo(Conta conta, float valor) throws SQLException{

@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import br.edu.ifpb.padroes.conexao.Conexao;
 import br.edu.ifpb.padroes.interfaces.AdministradorDaoIF;
 import br.edu.ifpb.padroes.modelo.Administrador;
+import java.util.List;
 
 public class AdministradorDao implements AdministradorDaoIF{
 	Conexao conexao;
@@ -19,7 +20,7 @@ public class AdministradorDao implements AdministradorDaoIF{
 		conexao = new Conexao();
 	}
 	
-	public void addAdministrador(Administrador admin) throws Exception {
+	public void adicionarAdministrador(Administrador admin) throws Exception {
 		String sql = "INSERT INTO ADMINISTRADOR (cpf, rg, nome, dataNasc, telefone, email, rua, numCasa"
 				+ ", bairro, cidade, senha) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 		
@@ -55,7 +56,7 @@ public class AdministradorDao implements AdministradorDaoIF{
 		}
 	}
 
-	public void removeAdministrador(String cpf) throws SQLException {
+	public void removerAdministrador(String cpf) throws SQLException {
 		String sql = "DELETE FROM ADMINISTRADOR WHERE cpf = '" + cpf + "';";
 		try{
 			conn = conexao.conectar();
@@ -99,7 +100,7 @@ public class AdministradorDao implements AdministradorDaoIF{
 		}
 	}
 
-	public Administrador buscaAdministrador(String cpf) throws SQLException {
+	public Administrador buscarAdministrador(String cpf) throws SQLException {
 		String sql = "SELECT * FROM ADMINISTRADOR WHERE cpf ILIKE '" + cpf + "';";
 		ResultSet rs;
 		try{
@@ -131,4 +132,8 @@ public class AdministradorDao implements AdministradorDaoIF{
 			conexao.desconectar(conn);
 		}
 	}
+        
+        public List<Administrador> buscarTodos(){
+            return null;
+        }
 }

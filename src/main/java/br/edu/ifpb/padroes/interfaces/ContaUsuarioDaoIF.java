@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ContaUsuarioDaoIF {
 
-    public void addContaUsuario(ContaUsuario contaUsuario) throws SQLException, Exception;
+    public void adicionarContaUsuario(ContaUsuario contaUsuario) throws SQLException, Exception;
 
     public void removerContaUsuario(String cpf) throws SQLException;
 
@@ -17,5 +17,4 @@ public interface ContaUsuarioDaoIF {
     public List<ContaUsuario> buscarTodas() throws SQLException;
     
     public ContaUsuario validarLogin(ContaUsuario contaUsuario);
-
 }

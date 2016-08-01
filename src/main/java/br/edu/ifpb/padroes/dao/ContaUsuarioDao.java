@@ -23,7 +23,7 @@ public class ContaUsuarioDao implements ContaUsuarioDaoIF {
         conexao = new Conexao();
     }
 
-    public void addContaUsuario(ContaUsuario contaUsuario) throws SQLException {
+    public void adicionarContaUsuario(ContaUsuario contaUsuario) throws SQLException {
         String sql = "INSERT INTO CONTA_USUARIO(cpf, senha, tipoConta" + ") VALUES(?,?,?);";
         try {
             conn = conexao.conectar();
@@ -130,7 +130,6 @@ public class ContaUsuarioDao implements ContaUsuarioDaoIF {
         }
     }
         
-
     public ContaUsuario validarLogin(ContaUsuario contaUsuario) {
         String sql = "SELECT * FROM CONTA_USUARIO cu WHERE cu.cpf = ? AND cu.senha = ?";
 

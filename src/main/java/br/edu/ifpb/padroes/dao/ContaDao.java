@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import br.edu.ifpb.padroes.conexao.Conexao;
 import br.edu.ifpb.padroes.interfaces.ContaDaoIF;
 import br.edu.ifpb.padroes.modelo.Agencia;
 import br.edu.ifpb.padroes.modelo.Conta;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class ContaDao implements ContaDaoIF {
 
@@ -22,7 +22,7 @@ public class ContaDao implements ContaDaoIF {
         conexao = new Conexao();
     }
 
-    public void salvarConta(Conta conta) throws SQLException {
+    public void adicionarConta(Conta conta) throws SQLException {
         String sql = "INSERT INTO CONTA (numero, saldo, dataAbertura, numAgencia) VALUES (?, ?, ?, ?);";
         try {
             conn = conexao.conectar();
@@ -47,7 +47,7 @@ public class ContaDao implements ContaDaoIF {
         }
     }
 
-    public void removeConta(int numero) throws SQLException {
+    public void removerConta(int numero) throws SQLException {
         String sql = "DELETE FROM CONTA WHERE numero = '" + numero + "';";
         try {
             conn = conexao.conectar();
@@ -63,7 +63,7 @@ public class ContaDao implements ContaDaoIF {
         }
     }
 
-    public Conta buscaConta(int numero) throws SQLException {
+    public Conta buscarConta(int numero) throws SQLException {
         String sql = "SELECT c.numero, c.saldo, c.dataAbertura, a.numero numAgencia"
                 + " FROM CONTA c, AGENCIA a WHERE numero = '" + numero + "';";
         ResultSet rs;
@@ -89,6 +89,10 @@ public class ContaDao implements ContaDaoIF {
         } finally {
             conexao.desconectar(conn);
         }
+    }
+    
+    public List<Conta> buscarTodas(){
+        return null;
     }
 
     public int obterNumConta() throws SQLException {

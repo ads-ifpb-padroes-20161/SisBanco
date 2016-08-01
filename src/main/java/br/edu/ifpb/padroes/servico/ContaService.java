@@ -13,21 +13,21 @@ public class ContaService {
 
     public ContaService() throws SQLException {
         fabrica = DaoFactory.createFactory();
-        contaDao = fabrica.criaContaDao();
+        contaDao = fabrica.criarContaDao();
     }
 
     public Conta abrirConta(Conta conta) throws SQLException {
         conta.setNumero(contaDao.obterNumConta());
-        contaDao.salvarConta(conta);
+        contaDao.adicionarConta(conta);
         return conta;
     }
 
     public Conta pesquisarConta(int numero) throws SQLException {
-        Conta conta = contaDao.buscaConta(numero);
+        Conta conta = contaDao.buscarConta(numero);
         return conta;
     }
 
     public void deletarConta(int numero) throws SQLException {
-        contaDao.removeConta(numero);
+        contaDao.removerConta(numero);
     }
 }

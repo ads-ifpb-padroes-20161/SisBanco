@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import br.edu.ifpb.padroes.conexao.Conexao;
 import br.edu.ifpb.padroes.interfaces.ClienteDaoIF;
 import br.edu.ifpb.padroes.modelo.Cliente;
@@ -27,7 +26,7 @@ public class ClienteDao implements ClienteDaoIF {
         conexao = new Conexao();
     }
 
-    public void addCliente(Cliente cliente) throws SQLException, ParseException {
+    public void adicionarCliente(Cliente cliente) throws SQLException, ParseException {
         String sql = "INSERT INTO CLIENTE (cpf_cnpj, rg, nome, dataNasc, telefone, email, rua, numCasa"
                 + ", bairro, cidade, senha) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
 
@@ -68,7 +67,7 @@ public class ClienteDao implements ClienteDaoIF {
         }
     }
 
-    public void removeCliente(String cpf_cnpj) throws SQLException {
+    public void removerCliente(String cpf_cnpj) throws SQLException {
         String sql = "DELETE FROM CLIENTE WHERE cpf_cnpj = '" + cpf_cnpj + "';";
         try {
             conn = conexao.conectar();
@@ -107,7 +106,7 @@ public class ClienteDao implements ClienteDaoIF {
         }
     }
 
-    public Cliente buscaCliente(String cpf_cnpj) throws SQLException {
+    public Cliente buscarCliente(String cpf_cnpj) throws SQLException {
         String sql = "SELECT * FROM CLIENTE WHERE cpf_cnpj = '" + cpf_cnpj + "';";
         ResultSet rs;
         try {
@@ -170,5 +169,9 @@ public class ClienteDao implements ClienteDaoIF {
             conexao.desconectar(conn);
         }
         return contas;
+    }
+    
+    public List<Cliente> buscarTodos(){
+        return null;
     }
 }

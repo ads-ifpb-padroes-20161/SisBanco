@@ -8,10 +8,10 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import br.edu.ifpb.padroes.conexao.Conexao;
 import br.edu.ifpb.padroes.interfaces.GerenteDaoIF;
 import br.edu.ifpb.padroes.modelo.Gerente;
+import java.util.List;
 
 public class GerenteDao implements GerenteDaoIF{
 	Conexao conexao;
@@ -21,7 +21,7 @@ public class GerenteDao implements GerenteDaoIF{
 		conexao = new Conexao();
 	}
 	
-	public void addGerente(Gerente gerente) throws SQLException, ParseException {
+	public void adicionarGerente(Gerente gerente) throws SQLException, ParseException {
 		String sql = "INSERT INTO GERENTE (cpf, rg, nome, dataNasc, telefone, email, rua, numCasa"
 				+ ", bairro, cidade, senha, numAgencia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
 		
@@ -57,7 +57,7 @@ public class GerenteDao implements GerenteDaoIF{
 		}
 	}
 
-	public void removeGerente(String cpf) throws SQLException {
+	public void removerGerente(String cpf) throws SQLException {
 		String sql = "DELETE FROM GERENTE WHERE cpf = '" + cpf + "';";
 		try{
 			conn = conexao.conectar();
@@ -101,7 +101,7 @@ public class GerenteDao implements GerenteDaoIF{
 		}
 	}
 
-	public Gerente buscaGerente(String cpf) throws SQLException {
+	public Gerente buscarGerente(String cpf) throws SQLException {
 		String sql = "SELECT * FROM GERENTE WHERE cpf = '" + cpf + "';";
 		ResultSet rs;
 		try{
@@ -134,4 +134,8 @@ public class GerenteDao implements GerenteDaoIF{
 			conexao.desconectar(conn);
 		}
 	}
+        
+        public List<Gerente> buscarTodos(){
+            return null;
+        }
 }

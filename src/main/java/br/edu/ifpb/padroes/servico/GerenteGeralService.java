@@ -2,7 +2,6 @@ package br.edu.ifpb.padroes.servico;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-
 import br.edu.ifpb.padroes.dao.DaoFactory;
 import br.edu.ifpb.padroes.interfaces.DaoFactoryIF;
 import br.edu.ifpb.padroes.interfaces.GerenteGeralDaoIF;
@@ -14,7 +13,7 @@ public class GerenteGeralService {
 	
 	public GerenteGeralService() throws SQLException{
 		fabrica = DaoFactory.createFactory();
-		gerenteGeralDao = fabrica.criaGerenteGeralDao();
+		gerenteGeralDao = fabrica.criarGerenteGeralDao();
 	}
 	
 	public void adicionarGerenteGeral(String cpf,String rg,String nome,String dataNasc,String telefone,String email,
@@ -29,22 +28,22 @@ public class GerenteGeralService {
 		novoGerente.setTelefone(telefone);
 		novoGerente.setEmail(email);
 		novoGerente.setRua(rua);
-		novoGerente.setNumCasa(numCasa);;
+		novoGerente.setNumCasa(numCasa);
 		novoGerente.setBairro(bairro);
 		novoGerente.setCidade(cidade);
 		novoGerente.setSenha(senha);
 		
-		gerenteGeralDao.addGerenteGeral(novoGerente);
+		gerenteGeralDao.adicionarGerenteGeral(novoGerente);
 		
 	}
 	
 	public GerenteGeral pesquisarGerenteGeral(String cpf) throws SQLException{
-		GerenteGeral gerente = gerenteGeralDao.buscaGerenteGeral(cpf); 
+		GerenteGeral gerente = gerenteGeralDao.buscarGerenteGeral(cpf); 
 		return gerente;
 	}
 	
 	public void deletarGerenteGeral(String cpf) throws SQLException{
-		gerenteGeralDao.removeGerenteGeral(cpf);
+		gerenteGeralDao.removerGerenteGeral(cpf);
 	}
 	
 	public void alterarGerenteGeral(String nome,String dataNasc,String telefone,String email,String rua,

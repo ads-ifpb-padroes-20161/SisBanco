@@ -1,7 +1,6 @@
 package br.edu.ifpb.padroes.dao;
 
 import java.sql.SQLException;
-
 import br.edu.ifpb.padroes.interfaces.AdministradorDaoIF;
 import br.edu.ifpb.padroes.interfaces.AgenciaDaoIF;
 import br.edu.ifpb.padroes.interfaces.ClienteDaoIF;
@@ -18,35 +17,35 @@ public class DaoFactoryBD implements DaoFactoryIF {
 
     }
 
-    public AdministradorDaoIF criaAdministradorDao() throws SQLException {
+    public AdministradorDaoIF criarAdministradorDao() throws SQLException {
         return new AdministradorDao();
     }
 
-    public AgenciaDaoIF criaAgenciaDao() throws SQLException {
+    public AgenciaDaoIF criarAgenciaDao() throws SQLException {
         return new AgenciaDao();
     }
 
-    public ClienteDaoIF criaClienteDao() throws SQLException {
+    public ClienteDaoIF criarClienteDao() throws SQLException {
         return new ClienteDao();
     }
 
-    public ContaDaoIF criaContaDao() throws SQLException {
+    public ContaDaoIF criarContaDao() throws SQLException {
         return new ContaDao();
     }
 
-    public GerenteDaoIF criaGerenteDao() throws SQLException {
+    public GerenteDaoIF criarGerenteDao() throws SQLException {
         return new GerenteDao();
     }
 
-    public GerenteGeralDaoIF criaGerenteGeralDao() throws SQLException {
+    public GerenteGeralDaoIF criarGerenteGeralDao() throws SQLException {
         return new GerenteGeralDao();
     }
 
-    public MovimentacaoDaoIF criaMovimentacaoDao() throws SQLException {
+    public MovimentacaoDaoIF criarMovimentacaoDao() throws SQLException {
         return new MovimentacaoDao();
     }
 
-    public ContaUsuarioDaoIF criaContaUsuarioDao() throws SQLException {
+    public ContaUsuarioDaoIF criarContaUsuarioDao() throws SQLException {
         return new ContaUsuarioDao();
     }
 }

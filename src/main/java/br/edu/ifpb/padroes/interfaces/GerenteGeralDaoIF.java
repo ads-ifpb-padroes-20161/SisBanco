@@ -2,12 +2,17 @@ package br.edu.ifpb.padroes.interfaces;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-
 import br.edu.ifpb.padroes.modelo.GerenteGeral;
+import java.util.List;
 
 public interface GerenteGeralDaoIF{
-	public void addGerenteGeral(GerenteGeral gGeral) throws SQLException, ParseException;
-	public void removeGerenteGeral(String cpf) throws SQLException;
+	public void adicionarGerenteGeral(GerenteGeral gGeral) throws SQLException, ParseException;
+        
+	public void removerGerenteGeral(String cpf) throws SQLException;
+        
 	public void atualizarGerenteGeral(GerenteGeral gGeral)throws SQLException, ParseException;
-	public GerenteGeral buscaGerenteGeral(String cpf) throws SQLException;
+        
+	public GerenteGeral buscarGerenteGeral(String cpf) throws SQLException;
+        
+        public List<GerenteGeral> buscarTodos() throws SQLException;
 }

@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import br.edu.ifpb.padroes.conexao.Conexao;
 import br.edu.ifpb.padroes.interfaces.AgenciaDaoIF;
 import br.edu.ifpb.padroes.modelo.Agencia;
@@ -22,7 +21,7 @@ public class AgenciaDao implements AgenciaDaoIF {
         conexao = new Conexao();
     }
 
-    public void addAgencia(Agencia agencia) throws SQLException {
+    public void adicionarAgencia(Agencia agencia) throws SQLException {
         String sql = "INSERT INTO AGENCIA (numero, nome, telefone, rua, numSede, bairro, cidade, cpfGerenteGeral"
                 + ") VALUES (?,?,?,?,?,?,?);";
 

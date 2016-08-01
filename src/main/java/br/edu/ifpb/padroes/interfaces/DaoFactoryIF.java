@@ -4,21 +4,19 @@ import java.sql.SQLException;
 
 public interface DaoFactoryIF {
 	
-	public AdministradorDaoIF criaAdministradorDao() throws SQLException;
+	public AdministradorDaoIF criarAdministradorDao() throws SQLException;
 	
-	public AgenciaDaoIF criaAgenciaDao() throws SQLException;
+	public AgenciaDaoIF criarAgenciaDao() throws SQLException;
 	
-	public ClienteDaoIF criaClienteDao() throws SQLException;
+	public ClienteDaoIF criarClienteDao() throws SQLException;
 	
-	public ContaDaoIF criaContaDao() throws SQLException;
+	public ContaDaoIF criarContaDao() throws SQLException;
 	
-	public GerenteDaoIF criaGerenteDao() throws SQLException;
+	public GerenteDaoIF criarGerenteDao() throws SQLException;
 	
-	public GerenteGeralDaoIF criaGerenteGeralDao() throws SQLException;
+	public GerenteGeralDaoIF criarGerenteGeralDao() throws SQLException;
 	
-	public MovimentacaoDaoIF criaMovimentacaoDao() throws SQLException;
+	public MovimentacaoDaoIF criarMovimentacaoDao() throws SQLException;
         
-        public ContaUsuarioDaoIF criaContaUsuarioDao() throws SQLException;
-        
-        
+        public ContaUsuarioDaoIF criarContaUsuarioDao() throws SQLException;
 }

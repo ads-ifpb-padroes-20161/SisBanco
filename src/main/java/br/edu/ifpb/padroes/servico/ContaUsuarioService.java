@@ -14,12 +14,11 @@ public class ContaUsuarioService {
 
     public ContaUsuarioService() throws SQLException {
         fabrica = DaoFactory.createFactory();
-        contaUsuarioDao = fabrica.criaContaUsuarioDao();
+        contaUsuarioDao = fabrica.criarContaUsuarioDao();
     }
 
     public void adicionarContaUsuario(ContaUsuario contaUsuario) throws SQLException, ParseException, Exception {
-
-        contaUsuarioDao.addContaUsuario(contaUsuario);
+        contaUsuarioDao.adicionarContaUsuario(contaUsuario);
     }
 
     public ContaUsuario pesquisarContaUsuario(String cpf) throws SQLException {
@@ -36,7 +35,6 @@ public class ContaUsuarioService {
     }
 
     public ContaUsuario validarLogin(ContaUsuario contaUsuario){
-        return contaUsuarioDao.validarLogin(contaUsuario);
-        
+        return contaUsuarioDao.validarLogin(contaUsuario);       
     }
 }

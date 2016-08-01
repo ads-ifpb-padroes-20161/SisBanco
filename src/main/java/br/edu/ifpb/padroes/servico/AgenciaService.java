@@ -15,7 +15,7 @@ public class AgenciaService {
 	
 	public AgenciaService() throws SQLException{
 		fabrica = DaoFactory.createFactory();
-		agenciaDao = fabrica.criaAgenciaDao();
+		agenciaDao = fabrica.criarAgenciaDao();
 	}
 	
 	public void adicionarAgencia(int numero,String nome,String telefone,String rua,int numSede,String bairro,String cidade,
@@ -30,7 +30,7 @@ public class AgenciaService {
 		agencia.setBairro(bairro);
 		agencia.setCidade(cidade);
 		
-		agenciaDao.addAgencia(agencia);
+		agenciaDao.adicionarAgencia(agencia);
 	}
 	
 	public Agencia pesquisarAgencia(int numero) throws SQLException{

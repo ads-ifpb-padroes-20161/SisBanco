@@ -16,16 +16,15 @@ public class ClienteService {
 	
 	public ClienteService() throws SQLException{
 		fabrica = DaoFactory.createFactory();
-		clienteDao = fabrica.criaClienteDao();
+		clienteDao = fabrica.criarClienteDao();
 	}
 	
 	public void adicionarCliente(Cliente cliente) throws SQLException, ParseException{
-		
-		clienteDao.addCliente(cliente);
+		clienteDao.adicionarCliente(cliente);
 	}
 	
 	public Cliente pesquisarCliente(String cpf_cnpj) throws SQLException{
-		Cliente cliente = clienteDao.buscaCliente(cpf_cnpj); 
+		Cliente cliente = clienteDao.buscarCliente(cpf_cnpj); 
 		return cliente;
 	}
         
@@ -34,12 +33,10 @@ public class ClienteService {
         }
 	
 	public void deletarCliente(String cpf_cnpj) throws SQLException{
-		clienteDao.removeCliente(cpf_cnpj);
+		clienteDao.removerCliente(cpf_cnpj);
 	}
 	
 	public void alterarCliente(Cliente cliente) throws SQLException, ParseException{
-		
-		
 		clienteDao.atualizarCliente(cliente);
 	}
 }
