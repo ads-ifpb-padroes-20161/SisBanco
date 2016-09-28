@@ -30,11 +30,7 @@ public class ContaUsuarioService {
         contaUsuarioDao.removerContaUsuario(cpf);
     }
 
-    public void atualizarContaUsuario(ContaUsuario contaUsuario) throws SQLException, ParseException, Exception {
-        contaUsuarioDao.atualizarContaUsuario(contaUsuario);
-    }
-
-    public ContaUsuario validarLogin(ContaUsuario contaUsuario){
-        return contaUsuarioDao.validarLogin(contaUsuario);       
+    public ContaUsuario validarLogin(ContaUsuario contaUsuario) {
+        return contaUsuarioDao.validarLogin(contaUsuario);
     }
 }

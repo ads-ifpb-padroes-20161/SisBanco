@@ -1,113 +1,117 @@
 package br.edu.ifpb.padroes.modelo;
 
-public class GerenteGeral{
-	private String cpf	;
-	private String rg;
-	private String nome;
-	private String dataNasc;
-	private String telefone;
-	private String email;
-	private String rua;
-	private int    numCasa;
-	private String bairro;
-	private String cidade;
-	private String senha;
-	
-	public GerenteGeral(){
+public class GerenteGeral {
 
-	}
+    private String cpf;
+    private String rg;
+    private String nome;
+    private String dataNasc;
+    private String telefone;
+    private String email;
+    private String rua;
+    private String numCasa;
+    private String bairro;
+    private String cidade;
+    private String senha;
+    
+    private static GerenteGeral instanciaUnica;
+    
+    public GerenteGeral() {
 
-	public String getCpf(){
-		return cpf;
-	}
+    }
 
-	public void setCpf(String cpf){
-		this.cpf = cpf;
-	}
+    public String getCpf() {
+        return cpf;
+    }
 
-	public String getRg(){
-		return rg;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public void setRg(String rg){
-		this.rg = rg;
-	}
-	
-	public String getNome(){
-		return nome;
-	}
+    public String getRg() {
+        return rg;
+    }
 
-	public void setNome(String nome){
-		this.nome = nome;
-	}
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
 
-	public String getDataNasc(){
-		return dataNasc;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setDataNasc(String dataNasc){
-		this.dataNasc = dataNasc;
-	}
-	
-	public String getEmail(){
-		return email;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setEmail(String email){
-		this.email = email;
-	}
+    public String getDataNasc() {
+        return dataNasc;
+    }
 
-	public String getRua(){
-		return rua;
-	}
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
 
-	public void setRua(String rua){
-		this.rua = rua;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public int getNumCasa(){
-		return numCasa;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setNumCasa(int numCasa){
-		this.numCasa = numCasa;
-	}
-	
-	public String getBairro(){
-		return bairro;
-	}
+    public String getRua() {
+        return rua;
+    }
 
-	public void setBairro(String bairro){
-		this.bairro = bairro;
-	}
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
 
-	public String getCidade(){
-		return cidade;
-	}
+    public String getNumCasa() {
+        return numCasa;
+    }
 
-	public void setCidade(String cidade){
-		this.cidade = cidade;
-	}
-	
-	public String getSenha(){
-		return senha;
-	}
-	
-	public void setSenha(String senha){
-		this.senha = senha;
-	}
+    public void setNumCasa(String numCasa) {
+        this.numCasa = numCasa;
+    }
 
-	public String getTelefone(){
-		return telefone;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setTelefone(String telefone){
-		this.telefone = telefone;
-	}
-	
-	public String toString(){
-		return "CPF: " + this.cpf+"\nRG: " + this.rg + "\nNOME: " + this.nome + "\nNASCIMENTO: " + this.dataNasc +
-				"\nTELEFONE: " + this.telefone + "\nEMAIL: " + email + "\n[ENDEREÇO]" + "\n   RUA: " + this.rua +
-				"   Nº: " + this.numCasa + "   BAIRRO: " + this.bairro + "   CIDADE: " + this.cidade;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    @Override
+    public String toString() {
+        return "CPF: " + this.cpf + "\nRG: " + this.rg + "\nNOME: " + this.nome + "\nNASCIMENTO: " + this.dataNasc
+                + "\nTELEFONE: " + this.telefone + "\nEMAIL: " + email + "\n[ENDEREÇO]" + "\n   RUA: " + this.rua
+                + "   Nº: " + this.numCasa + "   BAIRRO: " + this.bairro + "   CIDADE: " + this.cidade;
+    }
 }

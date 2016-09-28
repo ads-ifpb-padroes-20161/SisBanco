@@ -1,137 +1,134 @@
-/**
- * 
- */
 package br.edu.ifpb.padroes.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
-	private String cpf_cnpj;
-	private String rg;
-	private String nome;
-	private String dataNasc;
-	private String telefone;
-	private String email;
-	private String rua;
-	private int    numCasa;
-	private String bairro;
-	private String cidade;
-	private String senha;
-	private List<Conta> contas;
-	
-	public Cliente(){
 
-	}
+    private String cpf_cnpj;
+    private String rg;
+    private String nome;
+    private String dataNasc;
+    private String telefone;
+    private String email;
+    private String rua;
+    private String numCasa;
+    private String bairro;
+    private String cidade;
+    private String senha;
+    private List<Conta> contas;
 
-	public String getCpf_cnpj() {
-		return cpf_cnpj;
-	}
+    public Cliente() {
 
-	public void setCpf_cnpj(String cpf_cnpj){
-		this.cpf_cnpj = cpf_cnpj;
-	}
+    }
 
-	public String getRg(){
-		return rg;
-	}
+    public String getCpf_cnpj() {
+        return cpf_cnpj;
+    }
 
-	public void setRg(String rg){
-		this.rg = rg;
-	}
-	
-	public String getNome(){
-		return nome;
-	}
+    public void setCpf_cnpj(String cpf_cnpj) {
+        this.cpf_cnpj = cpf_cnpj;
+    }
 
-	public void setNome(String nome){
-		this.nome = nome;
-	}
+    public String getRg() {
+        return rg;
+    }
 
-	public String getDataNasc(){
-		return dataNasc;
-	}
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
 
-	public void setDataNasc(String dataNasc){
-		this.dataNasc = dataNasc;
-	}
-	
-	public String getEmail(){
-		return email;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setEmail(String email){
-		this.email = email;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getRua(){
-		return rua;
-	}
+    public String getDataNasc() {
+        return dataNasc;
+    }
 
-	public void setRua(String rua){
-		this.rua = rua;
-	}
+    public void setDataNasc(String dataNasc) {
+        this.dataNasc = dataNasc;
+    }
 
-	public int getNumCasa(){
-		return numCasa;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setNumCasa(int numCasa){
-		this.numCasa = numCasa;
-	}
-	
-	public String getBairro(){
-		return bairro;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setBairro(String bairro){
-		this.bairro = bairro;
-	}
+    public String getRua() {
+        return rua;
+    }
 
-	public String getCidade(){
-		return cidade;
-	}
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
 
-	public void setCidade(String cidade){
-		this.cidade = cidade;
-	}
-	
-	public String getSenha(){
-		return senha;
-	}
-	
-	public void setSenha(String senha){
-		this.senha = senha;
-	}
+    public String getNumCasa() {
+        return numCasa;
+    }
 
-	public String getTelefone(){
-		return telefone;
-	}
+    public void setNumCasa(String numCasa) {
+        this.numCasa = numCasa;
+    }
 
-	public void setTelefone(String telefone){
-		this.telefone = telefone;
-	}
-	
-	
-	public List<Conta> getContas() {
-		return contas;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setContas(List<Conta> contas) {
-		this.contas = contas;
-	}
-	
-	public void addConta(Conta conta){
-		if(contas == null){
-			contas = new ArrayList<Conta>();
-		}
-		contas.add(conta);
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-        @Override
-	public String toString(){
-		return "CPF: " + this.cpf_cnpj+"\nRG: " + this.rg + "\nNOME: " + this.nome + "\nNASCIMENTO: " + this.dataNasc +
-				"\nTELEFONE: " + this.telefone + "\nEMAIL: " + email + "\n[ENDEREÇO]" + "\n   RUA: " + this.rua +
-				"   Nº: " + this.numCasa + "   BAIRRO: " + this.bairro + "   CIDADE: " + this.cidade;
-	}
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public List<Conta> getContas() {
+        return contas;
+    }
+
+    public void setContas(List<Conta> contas) {
+        this.contas = contas;
+    }
+
+    public void addConta(Conta conta) {
+        if (contas == null) {
+            contas = new ArrayList<Conta>();
+        }
+        contas.add(conta);
+    }
+
+    @Override
+    public String toString() {
+        return "CPF: " + this.cpf_cnpj + "\nRG: " + this.rg + "\nNOME: " + this.nome + "\nNASCIMENTO: " + this.dataNasc
+                + "\nTELEFONE: " + this.telefone + "\nEMAIL: " + email + "\n[ENDEREÇO]" + "\n   RUA: " + this.rua
+                + "   Nº: " + this.numCasa + "   BAIRRO: " + this.bairro + "   CIDADE: " + this.cidade;
+    }
 }

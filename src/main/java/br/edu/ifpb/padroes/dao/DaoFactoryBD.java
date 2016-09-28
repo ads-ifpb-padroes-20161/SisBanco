@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import br.edu.ifpb.padroes.interfaces.AdministradorDaoIF;
 import br.edu.ifpb.padroes.interfaces.AgenciaDaoIF;
 import br.edu.ifpb.padroes.interfaces.ClienteDaoIF;
+import br.edu.ifpb.padroes.interfaces.ContaClienteDaoIF;
 import br.edu.ifpb.padroes.interfaces.ContaDaoIF;
 import br.edu.ifpb.padroes.interfaces.ContaUsuarioDaoIF;
 import br.edu.ifpb.padroes.interfaces.DaoFactoryIF;
@@ -47,5 +48,10 @@ public class DaoFactoryBD implements DaoFactoryIF {
 
     public ContaUsuarioDaoIF criarContaUsuarioDao() throws SQLException {
         return new ContaUsuarioDao();
+    }
+    
+    
+    public ContaClienteDaoIF criarContaClienteDao() throws SQLException {
+        return new ContaClienteDao();
     }
 }

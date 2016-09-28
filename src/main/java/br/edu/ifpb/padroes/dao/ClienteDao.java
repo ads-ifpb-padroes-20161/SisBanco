@@ -47,7 +47,7 @@ public class ClienteDao implements ClienteDaoIF {
             statement.setString(5, cliente.getTelefone());
             statement.setString(6, cliente.getEmail());
             statement.setString(7, cliente.getRua());
-            statement.setInt(8, cliente.getNumCasa());
+            statement.setString(8, cliente.getNumCasa());
             statement.setString(9, cliente.getBairro());
             statement.setString(10, cliente.getCidade());
             statement.setString(11, cliente.getSenha());
@@ -56,7 +56,7 @@ public class ClienteDao implements ClienteDaoIF {
 
             statement = conn.prepareStatement(sql2);
             statement.setString(1, cliente.getCpf_cnpj());
-            statement.setInt(2, cliente.getContas().get(0).getNumero());
+            statement.setString(2, cliente.getContas().get(0).getNumero());
             statement.execute();
             statement.close();
 
@@ -85,13 +85,14 @@ public class ClienteDao implements ClienteDaoIF {
 
     public void atualizarCliente(Cliente cliente) throws SQLException, ParseException {
         String dataString = cliente.getDataNasc();
-        DateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formato = new SimpleDateFormat("yyy-MM-dd");
         java.sql.Date data = new java.sql.Date(formato.parse(dataString).getTime());
 
         String sql = "UPDATE CLIENTE SET nome = '" + cliente.getNome() + "', dataNasc = '"
                 + data + "', telefone = '" + cliente.getTelefone() + "', email = '"
                 + cliente.getEmail() + "', rua = '" + cliente.getRua() + "', numCasa = '" + cliente.getNumCasa()
-                + "', bairro = '" + cliente.getBairro() + "', cidade = '" + cliente.getCidade() + "';";
+                + "', bairro = '" + cliente.getBairro() + "', cidade = '" + cliente.getCidade() + "' WHERE cpf_cnpj = '"
+                + cliente.getCpf_cnpj() + "'";
         try {
             conn = conexao.conectar();
             Statement statement = conn.createStatement();
@@ -124,7 +125,7 @@ public class ClienteDao implements ClienteDaoIF {
                 cliente.setTelefone(rs.getString("telefone"));
                 cliente.setEmail(rs.getString("email"));
                 cliente.setRua(rs.getString("rua"));
-                cliente.setNumCasa(rs.getInt("numCasa"));
+                cliente.setNumCasa(rs.getString("numCasa"));
                 cliente.setBairro(rs.getString("bairro"));
                 cliente.setCidade(rs.getString("cidade"));
                 cliente.setSenha(rs.getString("senha"));
@@ -137,41 +138,77 @@ public class ClienteDao implements ClienteDaoIF {
             conexao.desconectar(conn);
         }
     }
-    
-    public List<Conta> listarContasCliente(String cpf) throws SQLException{
+
+    public List<Conta> listarContasCliente(String cpf) throws SQLException {
         String sql = "select * from conta c where c.numero in "
                 + "(select cc.numconta from conta_cliente cc where cc.cpf_cnpj = ?)";
-        
+
         ResultSet rs;
         List<Conta> contas = new ArrayList();
         try {
             conn = conexao.conectar();
             PreparedStatement statement = conn.prepareStatement(sql);
-            
+
             statement.setString(1, cpf);
-            
+
             rs = statement.executeQuery();
-            
+
             Conta conta;
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 conta = new Conta();
-                conta.setNumero(rs.getInt("numero"));
+                conta.setNumero(rs.getString("numero"));
                 conta.setSaldo(rs.getFloat("saldo"));
-                
+
                 contas.add(conta);
             }
-            
+
             statement.close();
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
-        } finally{
+        } finally {
             conexao.desconectar(conn);
         }
         return contas;
     }
-    
-    public List<Cliente> buscarTodos(){
-        return null;
+
+    public List<Cliente> buscarTodos() throws SQLException {
+        String sql = "SELECT * FROM CLIENTE";
+        ResultSet rs;
+        conn = conexao.conectar();
+        Statement statement = conn.createStatement();
+
+        try {
+
+            rs = statement.executeQuery(sql);
+            Cliente cliente;
+
+            List<Cliente> clientes = new ArrayList();
+            while (rs.next()) {
+                cliente = new Cliente();
+
+                cliente.setCpf_cnpj(rs.getString("cpf_cnpj"));
+                cliente.setRg(rs.getString("rg"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setDataNasc(rs.getString("dataNasc"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setRua(rs.getString("rua"));
+                cliente.setNumCasa(rs.getString("numCasa"));
+                cliente.setBairro(rs.getString("bairro"));
+                cliente.setCidade(rs.getString("cidade"));
+                cliente.setSenha(rs.getString("senha"));
+                cliente.setContas(listarContasCliente(cliente.getCpf_cnpj()));
+
+                clientes.add(cliente);
+            }
+            return clientes;
+
+        } catch (Exception e) {
+            throw new SQLException();
+        } finally {
+            statement.close();
+            conexao.desconectar(conn);
+        }
     }
 }

@@ -9,7 +9,7 @@ public class Administrador {
     private String telefone;
     private String email;
     private String rua;
-    private int numCasa;
+    private String numCasa;
     private String bairro;
     private String cidade;
     private String senha;
@@ -74,11 +74,11 @@ public class Administrador {
         this.rua = rua;
     }
 
-    public int getNumCasa() {
+    public String getNumCasa() {
         return numCasa;
     }
 
-    public void setNumCasa(int numCasa) {
+    public void setNumCasa(String numCasa) {
         this.numCasa = numCasa;
     }
 
@@ -106,6 +106,7 @@ public class Administrador {
         this.senha = senha;
     }
 
+    @Override
     public String toString() {
         return "CPF: " + this.cpf + "\nRG: " + this.rg + "\nNOME: " + this.nome + "\nNASCIMENTO: " + this.dataNasc
                 + "\nTELEFONE: " + this.telefone + "\nEMAIL: " + email + "\n[ENDEREÇO]" + "\n   RUA: " + this.rua

@@ -23,20 +23,20 @@ public class AgenciaDao implements AgenciaDaoIF {
 
     public void adicionarAgencia(Agencia agencia) throws SQLException {
         String sql = "INSERT INTO AGENCIA (numero, nome, telefone, rua, numSede, bairro, cidade, cpfGerenteGeral"
-                + ") VALUES (?,?,?,?,?,?,?);";
+                + ") VALUES (?,?,?,?,?,?,?,?);";
 
         try {
             conn = conexao.conectar();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setInt(1, agencia.getNumero());
+            statement.setString(1, agencia.getNumero());
             statement.setString(2, agencia.getNome());
             statement.setString(3, agencia.getTelefone());
             statement.setString(4, agencia.getRua());
-            statement.setInt(5, agencia.getNumSede());
+            statement.setString(5, agencia.getNumSede());
             statement.setString(6, agencia.getBairro());
             statement.setString(7, agencia.getCidade());
-            statement.setString(8, agencia.getGerenteG().getCpf());
+            statement.setString(8, buscarGerente().getCpf());
 
             statement.execute();
             statement.close();
@@ -47,7 +47,7 @@ public class AgenciaDao implements AgenciaDaoIF {
         }
     }
 
-    public void removerAgencia(int numAgencia) throws SQLException {
+    public void removerAgencia(String numAgencia) throws SQLException {
         String sql = "DELETE FROM AGENCIA WHERE numero = '" + numAgencia + "';";
         try {
             conn = conexao.conectar();
@@ -64,9 +64,10 @@ public class AgenciaDao implements AgenciaDaoIF {
     }
 
     public void atualizarAgencia(Agencia agencia) throws SQLException {
-        String sql = "UPDATE AGENCIA SET nome = '" + agencia.getNome() + "', telefone = '"
-                + agencia.getTelefone() + "', rua = '" + agencia.getRua() + "', numSede = '" + agencia.getNumSede()
-                + "', bairro = '" + agencia.getBairro() + "', cidade = '" + agencia.getCidade() + "';";
+        String sql = "UPDATE AGENCIA SET nome = '" + agencia.getNome() + "', telefone = '" + agencia.getTelefone()
+                + "', rua = '" + agencia.getRua() + "', numSede = '" + agencia.getNumSede() + "', bairro = '" 
+                + agencia.getBairro() + "', cidade = '" + agencia.getCidade() + "', cpfGerenteGeral = '"
+                + buscarGerente().getCpf() +"' WHERE numero = '" + agencia.getNumero() + "';";
         try {
             conn = conexao.conectar();
             Statement statement = conn.createStatement();
@@ -81,13 +82,9 @@ public class AgenciaDao implements AgenciaDaoIF {
         }
     }
 
-    public Agencia buscarAgencia(int numAgencia) throws SQLException {
-        String sql = "SELECT a.numero, a.nome, a.telefone, a.rua, a.numSede, a.bairro, a.cidade"
-                + "g.cpf, g.rg, g.nome nomeGerente, g.dataNasc, g.telefone telGerente, g.email"
-                + "g.rua ruaGerente, g.numCasa, g.bairro bairroGerente, g.cidade gerenteCidade"
-                + " FROM AGENCIA a, GERENTE g"
-                + "WHERE a.numero = '" + numAgencia + "'"
-                + "AND a.cpfGerenteGeral = g.cpf";
+    public Agencia buscarAgencia(String numAgencia) throws SQLException {
+        String sql = "SELECT a.numero, a.nome, a.telefone, a.rua, a.numSede, a.bairro, a.cidade, a.cpfGerenteGeral"
+                + " FROM AGENCIA a WHERE a.numero = '" + numAgencia + "'";
 
         ResultSet rs;
         try {
@@ -96,19 +93,16 @@ public class AgenciaDao implements AgenciaDaoIF {
 
             rs = statement.executeQuery(sql);
             Agencia agencia = new Agencia();
-            GerenteGeral gerente = new GerenteGeral();
 
             while (rs.next()) {
-                agencia.setNumero(rs.getInt("numero"));
+                agencia.setNumero(rs.getString("numero"));
                 agencia.setNome(rs.getString("nome"));
                 agencia.setTelefone(rs.getString("telefone"));
                 agencia.setRua(rs.getString("rua"));
-                agencia.setNumSede(rs.getInt("numSede"));
+                agencia.setNumSede(rs.getString("numSede"));
                 agencia.setBairro(rs.getString("bairro"));
                 agencia.setCidade(rs.getString("cidade"));
-                agencia.setGerenteG(gerente);
-
-                gerente.setCpf(rs.getString("cpfGerenteGeral"));
+                agencia.setGerenteG(buscarGerente());
 
             }
             return agencia;
@@ -125,33 +119,65 @@ public class AgenciaDao implements AgenciaDaoIF {
         conn = conexao.conectar();
         Statement statement = conn.createStatement();
         try {
-            
+
             rs = statement.executeQuery(sql);
             Agencia agencia;
-            GerenteGeral gerenteG = new GerenteGeral();
             List<Agencia> agencias = new ArrayList();
+
             while (rs.next()) {
                 agencia = new Agencia();
 
-                agencia.setNumero(rs.getInt("numero"));
+                agencia.setNumero(rs.getString("numero"));
                 agencia.setNome(rs.getString("nome"));
                 agencia.setTelefone(rs.getString("telefone"));
                 agencia.setRua(rs.getString("rua"));
-                agencia.setNumSede(rs.getInt("numSede"));
+                agencia.setNumSede(rs.getString("numSede"));
                 agencia.setBairro(rs.getString("bairro"));
                 agencia.setCidade(rs.getString("cidade"));
-                agencia.setGerenteG(gerenteG);
+                agencia.setGerenteG(buscarGerente());
 
-                gerenteG.setCpf(rs.getString("cpfGerenteGeral"));
-                
                 agencias.add(agencia);
             }
             return agencias;
-            
+
         } catch (Exception e) {
             throw new SQLException();
         } finally {
             statement.close();
+            conexao.desconectar(conn);
+        }
+    }
+
+    private GerenteGeral buscarGerente() throws SQLException {
+
+        String sql = "SELECT * FROM GERENTE_GERAL";
+
+        ResultSet rs;
+        try {
+            conn = conexao.conectar();
+            Statement statement = conn.createStatement();
+
+            rs = statement.executeQuery(sql);
+            GerenteGeral gerente = new GerenteGeral();
+
+            while (rs.next()) {
+
+                gerente.setCpf(rs.getString("cpf"));
+                gerente.setRg(rs.getString("rg"));
+                gerente.setNome(rs.getString("nome"));
+                gerente.setDataNasc(rs.getString("dataNasc"));
+                gerente.setTelefone(rs.getString("telefone"));
+                gerente.setEmail(rs.getString("email"));
+                gerente.setRua(rs.getString("rua"));
+                gerente.setNumCasa(rs.getString("numCasa"));
+                gerente.setBairro(rs.getString("bairro"));
+                gerente.setCidade(rs.getString("cidade"));
+
+            }
+            return gerente;
+        } catch (Exception e) {
+            throw new SQLException(e);
+        } finally {
             conexao.desconectar(conn);
         }
     }

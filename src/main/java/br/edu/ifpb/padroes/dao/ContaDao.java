@@ -8,9 +8,12 @@ import java.sql.Statement;
 import br.edu.ifpb.padroes.conexao.Conexao;
 import br.edu.ifpb.padroes.interfaces.ContaDaoIF;
 import br.edu.ifpb.padroes.modelo.Agencia;
+import br.edu.ifpb.padroes.modelo.Cliente;
 import br.edu.ifpb.padroes.modelo.Conta;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContaDao implements ContaDaoIF {
@@ -34,20 +37,22 @@ public class ContaDao implements ContaDaoIF {
 
             java.sql.Date data2 = new java.sql.Date(df.parse(data).getTime());
 
-            statement.setInt(1, conta.getNumero());
+            statement.setString(1, conta.getNumero());
             statement.setFloat(2, conta.getSaldo());
             statement.setDate(3, data2);
-            statement.setInt(4, conta.getAgencia().getNumero());
+            statement.setString(4, conta.getAgencia().getNumero());
             statement.execute();
             statement.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            throw new SQLException(e);
+        } catch (ParseException e) {
             throw new SQLException(e);
         } finally {
             conexao.desconectar(conn);
         }
     }
 
-    public void removerConta(int numero) throws SQLException {
+    public void removerConta(String numero) throws SQLException {
         String sql = "DELETE FROM CONTA WHERE numero = '" + numero + "';";
         try {
             conn = conexao.conectar();
@@ -63,9 +68,9 @@ public class ContaDao implements ContaDaoIF {
         }
     }
 
-    public Conta buscarConta(int numero) throws SQLException {
+    public Conta buscarConta(String numero) throws SQLException {
         String sql = "SELECT c.numero, c.saldo, c.dataAbertura, a.numero numAgencia"
-                + " FROM CONTA c, AGENCIA a WHERE numero = '" + numero + "';";
+                + " FROM CONTA c, AGENCIA a WHERE c.numero = '" + numero + "';";
         ResultSet rs;
         try {
             conn = conexao.conectar();
@@ -76,12 +81,12 @@ public class ContaDao implements ContaDaoIF {
             Agencia agencia = new Agencia();
 
             while (rs.next()) {
-                conta.setNumero(rs.getInt("numero"));
+                conta.setNumero(rs.getString("numero"));
                 conta.setSaldo(rs.getFloat("saldo"));
                 conta.setDataAbertura(rs.getDate("dataAbertura"));
                 conta.setAgencia(agencia);
 
-                agencia.setNumero(rs.getInt("numAgencia"));
+                agencia.setNumero(rs.getString("numAgencia"));
             }
             return conta;
         } catch (Exception e) {
@@ -90,9 +95,73 @@ public class ContaDao implements ContaDaoIF {
             conexao.desconectar(conn);
         }
     }
-    
-    public List<Conta> buscarTodas(){
-        return null;
+
+    public List<Conta> buscarTodas() throws SQLException {
+        String sql = "SELECT * FROM CONTA";
+        ResultSet rs;
+        conn = conexao.conectar();
+        Statement statement = conn.createStatement();
+
+        try {
+
+            rs = statement.executeQuery(sql);
+            Conta conta;
+            Agencia agencia = new Agencia();
+            List<Conta> contas = new ArrayList();
+            while (rs.next()) {
+                conta = new Conta();
+
+                conta.setNumero(rs.getString("numero"));
+                conta.setDataAbertura(rs.getDate("dataAbertura"));
+                conta.setSaldo(rs.getFloat("saldo"));
+                conta.setAgencia(agencia);
+
+                agencia.setNumero(rs.getString("numAgencia"));
+
+                contas.add(conta);
+            }
+            return contas;
+
+        } catch (Exception e) {
+            throw new SQLException();
+        } finally {
+            statement.close();
+            conexao.desconectar(conn);
+        }
+    }
+
+    public List<Conta> buscarPorAgencia(String numAgencia) throws SQLException {
+        String sql = "SELECT * FROM CONTA WHERE numAgencia ='" + numAgencia + "'";
+        ResultSet rs;
+        conn = conexao.conectar();
+        Statement statement = conn.createStatement();
+
+        try {
+
+            rs = statement.executeQuery(sql);
+            Conta conta;
+            Agencia agencia = new Agencia();
+            List<Conta> contas = new ArrayList();
+            while (rs.next()) {
+                conta = new Conta();
+
+                conta.setNumero(rs.getString("numero"));
+                conta.setDataAbertura(rs.getDate("dataAbertura"));
+                conta.setSaldo(rs.getFloat("saldo"));
+                conta.setAgencia(agencia);
+
+                agencia.setNumero(rs.getString("numAgencia"));
+
+                contas.add(conta);
+            }
+            return contas;
+
+        } catch (Exception e) {
+            throw new SQLException();
+        } finally {
+            statement.close();
+            conexao.desconectar(conn);
+        }
     }
 
     public int obterNumConta() throws SQLException {
@@ -143,15 +212,49 @@ public class ContaDao implements ContaDaoIF {
             Statement statement = conn.createStatement();
 
             rs = statement.executeQuery(sql);
+            float saldo = 0;
+            while (rs.next()) {
+                saldo = rs.getFloat("saldo");
 
-            float saldo = rs.getFloat("saldo");
-
+            }
             rs.close();
-
             return saldo;
+
         } catch (Exception e) {
             throw new SQLException(e);
         } finally {
+
+            conexao.desconectar(conn);
+        }
+
+    }
+
+    public List<Cliente> buscarTitulares(String numConta) throws SQLException {
+        String sql = "SELECT distinct cli.cpf_cnpj,cli.nome FROM CONTA c, CLIENTE cli, CONTA_CLIENTE cc"
+                + " WHERE cc.numConta = '" + numConta + "' AND cc.cpf_cnpj = cli.cpf_cnpj";
+        ResultSet rs;
+        conn = conexao.conectar();
+        Statement statement = conn.createStatement();
+
+        try {
+
+            rs = statement.executeQuery(sql);
+            Cliente cliente;
+            List<Cliente> clientes = new ArrayList();
+
+            while (rs.next()) {
+                cliente = new Cliente();
+                cliente.setCpf_cnpj(rs.getString("cpf_cnpj"));
+                cliente.setNome(rs.getString("nome"));
+
+                clientes.add(cliente);
+            }
+            return clientes;
+
+        } catch (Exception e) {
+            throw new SQLException();
+        } finally {
+            statement.close();
             conexao.desconectar(conn);
         }
     }

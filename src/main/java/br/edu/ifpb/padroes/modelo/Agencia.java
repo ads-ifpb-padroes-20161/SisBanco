@@ -1,85 +1,86 @@
 package br.edu.ifpb.padroes.modelo;
 
 public class Agencia {
-	
-	private int numero;
-	private String nome;
-	private String telefone;
-	private String rua;
-	private int numSede;
-	private String bairro;
-	private String cidade;
-	private GerenteGeral gerenteG;
 
-	public Agencia() {
-		
-	}
+    private String numero;
+    private String nome;
+    private String telefone;
+    private String rua;
+    private String numSede;
+    private String bairro;
+    private String cidade;
+    private GerenteGeral gerenteG;
 
-	public int getNumero() {
-		return numero;
-	}
+    public Agencia() {
 
-	public void setNumero(int numAgencia) {
-		this.numero = numAgencia;
-	}
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getTelefone(){
-		return telefone;
-	}
-	
-	public void setTelefone(String telefone){
-		this.telefone = telefone;
-	}
+    public void setNumero(String numAgencia) {
+        this.numero = numAgencia;
+    }
 
-	public String getRua() {
-		return rua;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public String getTelefone() {
+        return telefone;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
-	public int getNumSede() {
-		return numSede;
-	}
+    public String getRua() {
+        return rua;
+    }
 
-	public void setNumSede(int numSede) {
-		this.numSede = numSede;
-	}
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
 
-	public String getCidade() {
-		return cidade;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public GerenteGeral getGerenteG() {
-		return gerenteG;
-	}
+    public String getNumSede() {
+        return numSede;
+    }
 
-	public void setGerenteG(GerenteGeral gerenteG) {
-		this.gerenteG = gerenteG;
-	}
-	
-	public String toString(){
-		return "" + this.numero;
-	}
+    public void setNumSede(String numSede) {
+        this.numSede = numSede;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public GerenteGeral getGerenteG() {
+        return gerenteG;
+    }
+
+    public void setGerenteG(GerenteGeral gerenteG) {
+        this.gerenteG = gerenteG;
+    }
+
+    @Override
+    public String toString() {
+        return this.numero;
+    }
 }
